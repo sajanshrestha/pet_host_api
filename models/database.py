@@ -1,5 +1,17 @@
 import sqlite3
 
+'''
+    create_owner(username, password)
+    get_owners()
+    get_owner(owner_id)
+    delete_owner(owner_id)
+
+    create_host(username, password)
+    get_hosts()
+    get_host(host_id)
+    delete_host(host_id)
+'''
+
 
 class Database:
 
@@ -23,15 +35,7 @@ class Database:
         cursor.execute(query)
 
         rows = cursor.fetchall()
-        owners = []
-        for row in rows:
-            owner = {
-                'id': row[0],
-                'username': row[1],
-                'password': row[2]
-            }
-            owners.append(owner)
-        return owners
+        return [dict(zip(('id', 'username', 'password'), row)) for row in rows]
 
     @staticmethod
     def get_owner(owner_id):
@@ -42,9 +46,8 @@ class Database:
         cursor.execute(query, (owner_id,))
 
         row = cursor.fetchone()
-        columns = ('id', 'username', 'password')
         if row:
-            return dict(zip(columns, row))
+            return dict(zip(('id', 'username', 'password'), row))
 
     @staticmethod
     def create_host(username, password):
@@ -66,15 +69,7 @@ class Database:
         cursor.execute(query)
 
         rows = cursor.fetchall()
-        hosts = []
-        for row in rows:
-            host = {
-                'id': row[0],
-                'username': row[1],
-                'password': row[2]
-            }
-            hosts.append(host)
-        return hosts
+        return [dict(zip(('id', 'username', 'password'), row)) for row in rows]
 
     @staticmethod
     def get_host(host_id):
@@ -85,9 +80,8 @@ class Database:
         cursor.execute(query, (host_id,))
 
         row = cursor.fetchone()
-        columns = ('id', 'username', 'password')
         if row:
-            return dict(zip(columns, row))
+            return dict(zip(('id', 'username', 'password'), row))
         connection.close()
 
     @staticmethod

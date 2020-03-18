@@ -1,9 +1,8 @@
 from flask import Flask, render_template
 from flask_restful import Api
-from owner import Owners, Owner
-from register import OwnerRegister, HostRegister
-from host import Hosts, Host
-from pet import Pets
+from resources.owner import Owners, Owner
+from resources.register import OwnerRegister, HostRegister
+from resources.host import Hosts, Host
 
 
 app = Flask(__name__)

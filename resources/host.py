@@ -1,29 +1,11 @@
 from flask_restful import Resource
-from database import Database
-
-hosts = [
-    {
-        'id': 1,
-        'username': 'walterwhite',
-        'password': '1234'
-    },
-
-    {
-        'id': 2,
-        'username': 'michael',
-        'password': '1234'
-    }
-
-]
+from models.database import Database
 
 
 class Hosts(Resource):
     def get(self):
         hosts = Database.get_hosts()
-        if hosts:
-            return hosts
-        else:
-            return []
+        return hosts if hosts else []
 
 
 class Host(Resource):

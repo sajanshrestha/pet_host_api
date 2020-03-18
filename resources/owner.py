@@ -1,14 +1,11 @@
 from flask_restful import Resource, reqparse
-from database import Database
+from models.database import Database
 
 
 class Owners(Resource):
     def get(self):
         owners = Database.get_owners()
-        if owners:
-            return owners, 200
-        else:
-            []
+        return owners, 200 if owners else []
 
 
 class Owner(Resource):
